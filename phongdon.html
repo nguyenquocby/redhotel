@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phòng Đơn - Red Hotel</title>
+    <link rel="icon" href="image/logo/logo.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #c19a6b;
+        --secondary-color: #1a2a3a;
+        --light-color: #f8f5f2;
+        --dark-color: #222;
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        color: var(--dark-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+        background-color: var(--light-color);
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 20px 0;
+        transition: var(--transition);
+        background-color: var(--secondary-color);
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--light-color);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        height: 60px;
+        width: auto;
+      }
+
+      /* Room Hero */
+      .room-hero {
+        height: 60vh;
+        min-height: 500px;
+        position: relative;
+        margin-top: 80px;
+        display: flex;
+        align-items: flex-end;
+        color: var(--light-color);
+      }
+
+      .room-hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to top,
+          rgba(26, 42, 58, 0.9),
+          rgba(26, 42, 58, 0.3)
+        );
+        z-index: 1;
+      }
+
+      .room-hero img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .room-hero-content {
+        position: relative;
+        z-index: 2;
+        padding-bottom: 60px;
+        width: 100%;
+      }
+
+      .room-hero h1 {
+        font-size: 48px;
+        margin-bottom: 15px;
+      }
+
+      .room-price {
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+      }
+
+      .room-price span {
+        font-size: 16px;
+        color: var(--light-color);
+        font-weight: normal;
+      }
+
+      /* Room Details */
+      .room-details {
+        padding: 80px 0;
+      }
+
+      .room-details-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+
+      .room-main {
+        flex: 2;
+        min-width: 300px;
+      }
+
+      .room-sidebar {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      .room-description h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        color: var(--secondary-color);
+        position: relative;
+        padding-bottom: 15px;
+      }
+
+      .room-description h2:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: var(--primary-color);
+      }
+
+      .room-description p {
+        margin-bottom: 20px;
+        font-size: 16px;
+      }
+
+      /* Amenities */
+      .room-amenities {
+        margin: 40px 0;
+      }
+
+      .room-amenities h3 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: var(--secondary-color);
+      }
+
+      .amenities-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+      }
+
+      .amenity-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .amenity-item i {
+        color: var(--primary-color);
+        margin-right: 10px;
+        font-size: 18px;
+        width: 25px;
+      }
+
+      /* Gallery */
+      .room-gallery {
+        margin: 40px 0;
+      }
+
+      .room-gallery h3 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: var(--secondary-color);
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .gallery-item {
+        height: 200px;
+        overflow: hidden;
+        border-radius: 5px;
+        position: relative;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+
+      /* Booking Form */
+      .booking-card {
+        background-color: white;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 100px;
+      }
+
+      .booking-card h3 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: var(--secondary-color);
+        text-align: center;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: "Montserrat", sans-serif;
+        transition: var(--transition);
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary-color);
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background-color: var(--primary-color);
+        color: var(--light-color);
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: 500;
+        transition: var(--transition);
+        border: 2px solid var(--primary-color);
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+      }
+
+      .btn:hover {
+        background-color: transparent;
+        color: var(--primary-color);
+      }
+
+      /* Similar Rooms */
+      .similar-rooms {
+        padding: 60px 0;
+        background-color: #f5f5f5;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .section-title h2 {
+        font-size: 36px;
+        color: var(--secondary-color);
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title h2:after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background-color: var(--primary-color);
+      }
+
+      .rooms-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .room-card {
+        background-color: white;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+      }
+
+      .room-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .room-image {
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .room-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .room-card:hover .room-image img {
+        transform: scale(1.05);
+      }
+
+      .room-info {
+        padding: 20px;
+      }
+
+      .room-info h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: var(--secondary-color);
+      }
+
+      .room-price-sm {
+        font-size: 18px;
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .room-price-sm span {
+        font-size: 14px;
+        color: var(--dark-color);
+        font-weight: normal;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--secondary-color);
+        color: var(--light-color);
+        padding: 60px 0 20px;
+      }
+
+      .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+      }
+
+      .footer-col {
+        flex: 1;
+        min-width: 250px;
+        margin-bottom: 30px;
+        padding-right: 20px;
+      }
+
+      .footer-col h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-col h3:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background-color: var(--primary-color);
+      }
+
+      .footer-col p {
+        margin-bottom: 15px;
+        opacity: 0.8;
+      }
+
+      .social-links {
+        display: flex;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--light-color);
+        border-radius: 50%;
+        margin-right: 10px;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-3px);
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+        list-style: none;
+      }
+
+      .footer-links a {
+        color: var(--light-color);
+        text-decoration: none;
+        transition: var(--transition);
+        opacity: 0.8;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-color);
+        padding-left: 5px;
+        opacity: 1;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        .room-hero h1 {
+          font-size: 40px;
+        }
+
+        .room-details-container {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .room-hero {
+          height: 50vh;
+          min-height: 400px;
+          margin-top: 70px;
+        }
+
+        .room-hero h1 {
+          font-size: 36px;
+        }
+
+        .room-price {
+          font-size: 20px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .room-hero {
+          height: 40vh;
+          min-height: 300px;
+        }
+
+        .room-hero h1 {
+          font-size: 28px;
+        }
+
+        .section-title h2 {
+          font-size: 28px;
+        }
+      }
+      /* Mobile Menu Button - Ẩn trên desktop */
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      /* Menu chính */
+      #mainNav {
+        display: block;
+      }
+
+      #mainNav ul.menu {
+        display: flex;
+        list-style: none;
+      }
+
+      #mainNav ul.menu li {
+        margin-left: 30px;
+      }
+
+      #mainNav ul.menu li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      /* Nút đóng menu - Ẩn trên desktop */
+      .close-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+      }
+
+      /* Responsive cho mobile */
+      @media (max-width: 768px) {
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        #mainNav {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 80%;
+          max-width: 300px;
+          height: 100vh;
+          background: var(--secondary-color);
+          padding: 80px 30px;
+          transition: all 0.4s ease;
+          z-index: 1000;
+        }
+
+        #mainNav.active {
+          right: 0;
+        }
+
+        #mainNav ul.menu {
+          flex-direction: column;
+        }
+
+        #mainNav ul.menu li {
+          margin: 15px 0;
+        }
+
+        .close-menu-btn {
+          display: block;
+        }
+      }
+      /*---style click---*/
+      /* Lightbox Enhanced Styles */
+      .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      .lightbox.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .lightbox-content {
+        position: relative;
+        transform: scale(0.8);
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        max-width: 90%;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .lightbox.active .lightbox-content {
+        transform: scale(1);
+      }
+
+      .lightbox-image {
+        max-width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+        border-radius: 4px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0.1s;
+      }
+
+      .lightbox.active .lightbox-image {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        width: 50px;
+        height: 50px;
+        font-size: 28px;
+        color: white;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: rotate(90deg);
+      }
+
+      .lightbox.active .lightbox-close {
+        opacity: 1;
+        transform: rotate(0deg);
+        transition-delay: 0.2s;
+      }
+
+      .lightbox-close:hover {
+        background: var(--primary-color);
+        transform: scale(1.1) rotate(0deg);
+      }
+
+      .lightbox-caption {
+        color: white;
+        margin-top: 20px;
+        font-size: 18px;
+        text-align: center;
+        max-width: 80%;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.4s ease 0.2s;
+      }
+
+      .lightbox.active .lightbox-caption {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Navigation arrows */
+      .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+        transform: translateY(-50%);
+        z-index: 10;
+      }
+
+      .lightbox-prev,
+      .lightbox-next {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+      }
+
+      .lightbox.active .lightbox-prev,
+      .lightbox.active .lightbox-next {
+        opacity: 1;
+        transition-delay: 0.3s;
+      }
+
+      .lightbox-prev:hover,
+      .lightbox-next:hover {
+        background: var(--primary-color);
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header">
+      <div class="container header-container">
+        <a href="index.html" class="logo">
+          <img src="image/logo/Red-white.png" alt="Red Hotel" />
+        </a>
+
+        <!-- Nút menu mobile -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <nav id="mainNav">
+          <!-- Nút đóng menu mobile -->
+          <button class="close-menu-btn" id="closeMenuBtn">
+            <i class="fas fa-times"></i>
+          </button>
+
+          <ul class="menu">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="#">Phòng nghỉ</a></li>
+            <li><a href="#">Liên hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Room Hero -->
+    <section class="room-hero">
+      <img src="image/room/giuongdon.jpg" alt="Phòng Đơn" />
+      <div class="container room-hero-content">
+        <h1>Phòng Đơn</h1>
+        <div class="room-price">300.000đ <span>/ đêm</span></div>
+        <a href="#booking" class="btn">Đặt phòng ngay</a>
+      </div>
+    </section>
+
+    <!-- Room Details -->
+    <section class="room-details">
+      <div class="container room-details-container">
+        <div class="room-main">
+          <div class="room-description">
+            <h2>Mô tả phòng</h2>
+            <p>
+              Phòng Deluxe tại Red Hotel mang đến không gian nghỉ ngơi đơn giản,
+              ấm cúng và tiện nghi, phù hợp cho các chuyến du lịch ngắn ngày
+              hoặc công tác. Với diện tích khoảng 25–30m², phòng được bố trí gọn
+              gàng, tận dụng tối đa ánh sáng tự nhiên để tạo cảm giác dễ chịu.
+            </p>
+            <p>
+              Phòng có cửa sổ nhìn ra thành phố hoặc sân vườn nhỏ, được trang bị
+              giường đôi tiêu chuẩn, máy điều hòa, TV màn hình phẳng, wifi miễn
+              phí và bàn làm việc nhỏ. Phòng tắm riêng có vòi sen, nước nóng
+              lạnh đầy đủ, cùng các vật dụng cơ bản như khăn tắm, xà phòng và
+              dầu gội.
+            </p>
+          </div>
+
+          <div class="room-amenities">
+            <h3>Tiện nghi phòng</h3>
+            <div class="amenities-grid">
+              <div class="amenity-item">
+                <i class="fas fa-wifi"></i>
+                <span>Wifi tốc độ cao</span>
+              </div>
+              <div class="amenity-item">
+                <i class="fas fa-tv"></i>
+                <span>Smart TV 42 inch</span>
+              </div>
+              <div class="amenity-item">
+                <i class="fas fa-snowflake"></i>
+                <span>Điều hòa nhiệt độ</span>
+              </div>
+              <div class="amenity-item">
+                <i class="fas fa-coffee"></i>
+                <span>Bộ ấm trà/cà phê</span>
+              </div>
+              <div class="amenity-item">
+                <i class="fas fa-wine-glass-alt"></i>
+                <span>Mini bar</span>
+              </div>
+              <div class="amenity-item">
+                <i class="fas fa-lock"></i>
+                <span>Két an toàn</span>
+              </div>
+              <div class="amenity-item">
+                <i class="fas fa-bath"></i>
+                <span>Bồn tắm đứng</span>
+              </div>
+              <div class="amenity-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>Điện thoại quốc tế</span>
+              </div>
+              <div class="amenity-item">
+                <i class="fas fa-umbrella-beach"></i>
+                <span>Áo choàng tắm</span>
+              </div>
+              <div class="amenity-item">
+                <i class="fas fa-utensils"></i>
+                <span>Dịch vụ phòng 24/7</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="room-gallery">
+            <h3>Hình ảnh phòng</h3>
+            <div class="gallery-grid">
+              <div class="gallery-item">
+                <img src="image/inforroom/giuongdon/Room.jpg" alt="Room" />
+              </div>
+              <div class="gallery-item">
+                <img
+                  src="image/inforroom/giuongdon/Bathroom.JPG"
+                  alt="Bathroom"
+                />
+              </div>
+              <div class="gallery-item">
+                <img
+                  src="image/inforroom/giuongdon/Roomview.JPG"
+                  alt="Room View"
+                />
+              </div>
+              <div class="gallery-item">
+                <img
+                  src="image/inforroom/giuongdon/Details.jpg"
+                  alt="Room Details"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-sidebar">
+          <div class="booking-card" id="booking">
+            <h3>Đặt phòng</h3>
+            <form>
+              <div class="form-group">
+                <label for="checkin">Ngày nhận phòng</label>
+                <input type="date" id="checkin" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label for="checkout">Ngày trả phòng</label>
+                <input
+                  type="date"
+                  id="checkout"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="adults">Người lớn</label>
+                <select id="adults" class="form-control" required>
+                  <option value="1">1 người</option>
+                  <option value="2" selected>2 người</option>
+                  <option value="3">3 người</option>
+                  <option value="4">4 người</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="children">Trẻ em</label>
+                <select id="children" class="form-control">
+                  <option value="0" selected>Không có</option>
+                  <option value="1">1 trẻ</option>
+                  <option value="2">2 trẻ</option>
+                </select>
+              </div>
+              <button type="submit" class="btn">Kiểm tra phòng trống</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Similar Rooms -->
+    <section class="similar-rooms">
+      <div class="container">
+        <div class="section-title">
+          <h2>Phòng tương tự</h2>
+        </div>
+
+        <div class="rooms-grid">
+          <div class="room-card">
+            <div class="room-image">
+              <img src="image/room/giuongdoi.jpg" alt="" />
+            </div>
+            <div class="room-info">
+              <h3>Phòng Đôi</h3>
+              <div class="room-price-sm">500.000đ <span>/ đêm</span></div>
+              <a href="phongdoi.html" class="btn">Xem chi tiết</a>
+            </div>
+          </div>
+
+          <div class="room-card">
+            <div class="room-image">
+              <img src="image/room/giuongview.jpg" alt="" />
+            </div>
+            <div class="room-info">
+              <h3>Phòng Đôi View</h3>
+              <div class="room-price-sm">600.000đ <span>/ đêm</span></div>
+              <a href="#" class="btn">Xem chi tiết</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-----click picture----------------->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightboxClose">&times;</button>
+      <div class="lightbox-content">
+        <img class="lightbox-image" id="lightboxImage" alt="" />
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+      </div>
+      <div class="lightbox-nav">
+        <button class="lightbox-prev" id="lightboxPrev">&#10094;</button>
+        <button class="lightbox-next" id="lightboxNext">&#10095;</button>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-col">
+            <h3>Về Red Hotel</h3>
+            <p>
+              Là khách sạn 2 sao, Red Hotel tự hào mang đến không gian nghỉ ngơi
+              gọn gàng, tiện nghi và dịch vụ tận tâm với mức giá hợp lý.
+            </p>
+            <div class="social-links">
+              <a href="https://www.facebook.com/redhotelquynhon"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="https://www.booking.com/Share-HoSOwbC"
+                ><i class="fas fa-hotel"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h3>Liên kết nhanh</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">Trang chủ</a></li>
+              <li><a href="#">Phòng nghỉ</a></li>
+              <li><a href="#">Liên hệ</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Liên hệ</h3>
+            <p>
+              <i class="fas fa-map-marker-alt"></i> Số 10, Đường Bình Hà, P. Thị
+              Nại, TP. Quy Nhơn, Bình Định
+            </p>
+            <p><i class="fas fa-phone-alt"></i> +8497 290 5390</p>
+            <p><i class="fas fa-envelope"></i> Redhotel77@gmail.com</p>
+          </div>
+
+          <div class="footer-col">
+            <h3>Đăng ký nhận tin</h3>
+            <p>
+              Đăng ký để nhận thông tin khuyến mãi và ưu đãi đặc biệt từ chúng
+              tôi.
+            </p>
+            <form class="newsletter-form">
+              <div class="form-group">
+                <input
+                  type="email"
+                  placeholder="Email của bạn"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn">Đăng ký</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 Red Hotel. Bảo lưu mọi quyền.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Xử lý menu mobile
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+        const closeMenuBtn = document.getElementById("closeMenuBtn");
+        const mainNav = document.getElementById("mainNav");
+
+        // Mở menu mobile
+        mobileMenuBtn.addEventListener("click", function () {
+          mainNav.classList.add("active");
+          document.body.style.overflow = "hidden"; // Ngăn scroll khi menu mở
+        });
+
+        // Đóng menu mobile
+        closeMenuBtn.addEventListener("click", function () {
+          mainNav.classList.remove("active");
+          document.body.style.overflow = ""; // Cho phép scroll lại
+        });
+
+        // Đóng menu khi click vào link
+        const navLinks = document.querySelectorAll("#mainNav ul.menu li a");
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            mainNav.classList.remove("active");
+            document.body.style.overflow = "";
+          });
+        });
+      });
+    </script>
+    <script>
+      // Set min date for check-in (today)
+      document.addEventListener("DOMContentLoaded", function () {
+        const today = new Date().toISOString().split("T")[0];
+        document.getElementById("checkin").min = today;
+
+        // Update checkout min date when checkin changes
+        document
+          .getElementById("checkin")
+          .addEventListener("change", function () {
+            document.getElementById("checkout").min = this.value;
+          });
+      });
+
+      // Simple form submission
+      document
+        .querySelector(".booking-card form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          alert(
+            "Yêu cầu đặt phòng của bạn đã được gửi. Chúng tôi sẽ liên hệ lại để xác nhận trong thời gian sớm nhất."
+          );
+          this.reset();
+        });
+    </script>
+    <!-----------script click------------------->
+    <script>
+      // Enhanced Lightbox
+      document.addEventListener("DOMContentLoaded", function () {
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightboxImage");
+        const lightboxCaption = document.getElementById("lightboxCaption");
+        const lightboxClose = document.getElementById("lightboxClose");
+        const lightboxPrev = document.getElementById("lightboxPrev");
+        const lightboxNext = document.getElementById("lightboxNext");
+        const galleryItems = document.querySelectorAll(".gallery-item img");
+
+        let currentIndex = 0;
+        const images = Array.from(galleryItems).map((img) => ({
+          src: img.src,
+          alt: img.alt,
+        }));
+
+        // Mở lightbox
+        function openLightbox(index) {
+          currentIndex = index;
+          updateLightbox();
+          lightbox.classList.add("active");
+          document.body.style.overflow = "hidden";
+        }
+
+        // Cập nhật nội dung lightbox
+        function updateLightbox() {
+          lightboxImage.src = images[currentIndex].src;
+          lightboxCaption.textContent = images[currentIndex].alt;
+
+          // Ẩn/hiện nút điều hướng
+          lightboxPrev.style.visibility =
+            currentIndex === 0 ? "hidden" : "visible";
+          lightboxNext.style.visibility =
+            currentIndex === images.length - 1 ? "hidden" : "visible";
+        }
+
+        // Đóng lightbox
+        function closeLightbox() {
+          lightbox.classList.remove("active");
+          document.body.style.overflow = "";
+        }
+
+        // Xử lý sự kiện
+        galleryItems.forEach((item, index) => {
+          item.addEventListener("click", () => openLightbox(index));
+        });
+
+        lightboxClose.addEventListener("click", closeLightbox);
+
+        lightbox.addEventListener("click", function (e) {
+          if (e.target === lightbox) closeLightbox();
+        });
+
+        lightboxPrev.addEventListener("click", function (e) {
+          e.stopPropagation();
+          if (currentIndex > 0) {
+            currentIndex--;
+            updateLightbox();
+          }
+        });
+
+        lightboxNext.addEventListener("click", function (e) {
+          e.stopPropagation();
+          if (currentIndex < images.length - 1) {
+            currentIndex++;
+            updateLightbox();
+          }
+        });
+
+        // Điều hướng bằng bàn phím
+        document.addEventListener("keydown", function (e) {
+          if (!lightbox.classList.contains("active")) return;
+
+          if (e.key === "Escape") {
+            closeLightbox();
+          } else if (e.key === "ArrowLeft" && currentIndex > 0) {
+            currentIndex--;
+            updateLightbox();
+          } else if (
+            e.key === "ArrowRight" &&
+            currentIndex < images.length - 1
+          ) {
+            currentIndex++;
+            updateLightbox();
+          }
+        });
+
+        // Preload images for smoother transitions
+        images.forEach((img) => {
+          const image = new Image();
+          image.src = img.src;
+        });
+      });
+    </script>
+  </body>
+</html>
